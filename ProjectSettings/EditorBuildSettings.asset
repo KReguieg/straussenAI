@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/MeasuringTool/MeasuringToolSampleScene.unity
     guid: 54c3454a2e74c974fbab89260a3bcb07
+  - enabled: 1
+    path: Assets/CameraAccess/PassthroughCameraApiSamples/CameraViewer/CameraViewer.unity
+    guid: ad5bb12b10679b840999aa322aa7a491
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 6401d9b282767a3469f776f6f1ae57e9, type: 2}
