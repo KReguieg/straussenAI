@@ -44,15 +44,6 @@
       },
       "url": "https://npm.developer.oculus.com"
     },
-    "com.meta.xr.simulator.synthenvbuilder": {
-      "version": "60.0.1",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.postprocessing": "3.2.2"
-      },
-      "url": "https://npm.developer.oculus.com"
-    },
     "com.unity.ai.navigation": {
       "version": "2.0.5",
       "depth": 0,
@@ -152,15 +143,6 @@
       "depth": 3,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.postprocessing": {
-      "version": "3.4.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.physics": "1.0.0"
-      },
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
