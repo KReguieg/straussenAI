@@ -6,14 +6,17 @@ using System.Text;
 using TMPro;
 using Newtonsoft.Json.Linq;
 using PassthroughCameraSamples;
+using UnityEngine.Events;
 
 
 public class OpenAIVisionPrompt : MonoBehaviour
 {
+    [SerializeField] private UnityEvent<string> onResponseReceived;
+
     [SerializeField] private OpenAIPromptDefaults promptDefaults;
     [SerializeField] private GptModel selectedModel = GptModel.GPT4o;
 
-    
+
     [SerializeField] private string userPrompt = "Was siehst du auf diesem Bild?";
     [SerializeField] private TextMeshProUGUI responseText;
     [SerializeField] private WebCamTextureManager m_webCamTextureManager;
@@ -28,13 +31,18 @@ public class OpenAIVisionPrompt : MonoBehaviour
     {
         openAIApiKey = await APIKeyManager.GetAPIKeyAsync();
 
+
+#if UNITY_EDITOR
         // Start the webcam
-        //webCamTexture = new WebCamTexture();
-        //Renderer renderer = GetComponent<Renderer>();
-        //if (renderer != null)
-        //    renderer.material.mainTexture = webCamTexture;
-        //webCamTexture.Play();
-        StartCoroutine(GetWebcamTexture());
+        webCamTexture = new WebCamTexture();
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null)
+            renderer.material.mainTexture = webCamTexture;
+        webCamTexture.Play();
+#else
+    StartCoroutine(GetWebcamTexture());
+#endif
+
     }
 
     private IEnumerator GetWebcamTexture()
@@ -100,6 +108,8 @@ public class OpenAIVisionPrompt : MonoBehaviour
             string content = ExtractContentFromResponse(responseJson);
 
             responseText.text = content;
+
+            onResponseReceived.Invoke(content);
         }
         else
         {
