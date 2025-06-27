@@ -11,7 +11,7 @@ public class PingPongMover : MonoBehaviour
 
     void Start()
     {
-        startPos = transform.position;
+        startPos = transform.localPosition;
         endPos = startPos + offset;
     }
 
@@ -19,6 +19,6 @@ public class PingPongMover : MonoBehaviour
     {
         timer += Time.deltaTime;
         float t = Mathf.PingPong(timer / duration, 1f);
-        transform.position = Vector3.Lerp(startPos, startPos + offset, t);
+        transform.localPosition = Vector3.Lerp(startPos, startPos + offset, t);
     }
 }
