@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b862ee14fb479fbfe5fffe655d3ed3, type: 3}
   m_Name: MetaQuestTouchProControllerProfile Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Meta Quest Touch Pro Controller Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.metaquestpro
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feeef8d85de8db242bdda70cc7ff5acd, type: 3}
   m_Name: OculusTouchControllerProfile Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Oculus Touch Controller Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.oculustouch
@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7365b139f7aec43b23d26b7a48b5a6, type: 3}
   m_Name: MetaQuestTouchPlusControllerProfile Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Meta Quest Touch Plus Controller Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.metaquestplus
@@ -606,7 +606,6 @@ MonoBehaviour:
   m_Name: Android
   m_EditorClassIdentifier: 
   features:
-  - {fileID: 3976319382595137739}
   - {fileID: 7093581033160211400}
   - {fileID: 3449608355878276828}
   - {fileID: -4454430097284530441}
@@ -617,16 +616,6 @@ MonoBehaviour:
   - {fileID: 2160957943434144339}
   - {fileID: -1570969078327907017}
   - {fileID: -7036325369026315506}
-  - {fileID: 353734563686203383}
-  - {fileID: -3215300560423078173}
-  - {fileID: -2004431125282509043}
-  - {fileID: 2114396359069232109}
-  - {fileID: 5994026887968288311}
-  - {fileID: -6206232672510969403}
-  - {fileID: -9102783716255445618}
-  - {fileID: -612695648319827997}
-  - {fileID: 2771541846188141716}
-  - {fileID: -217536611360958860}
   - {fileID: 6059788350421414158}
   - {fileID: 634460501875392226}
   - {fileID: -7091904484156632174}
@@ -644,7 +633,6 @@ MonoBehaviour:
   m_colorSubmissionModes:
     m_List: 00000000
   m_depthSubmissionMode: 0
-  m_spacewarpMotionVectorTextureFormat: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
   m_foveatedRenderingApi: 0
@@ -1020,8 +1008,6 @@ MonoBehaviour:
   optimizeBufferDiscards: 1
   lateLatchingMode: 0
   lateLatchingDebug: 0
-  optimizeMultiviewRenderRegions: 0
-  spacewarpMotionVectorTextureFormat: 0
 --- !u!114 &2354883240384358230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,7 +1047,6 @@ MonoBehaviour:
   m_colorSubmissionModes:
     m_List: 00000000
   m_depthSubmissionMode: 0
-  m_spacewarpMotionVectorTextureFormat: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
   m_foveatedRenderingApi: 0
@@ -1305,7 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4710975c7840e7d499bbb3757c22b0a5, type: 3}
   m_Name: MetaXRSubsampledLayout Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Meta XR Subsampled Layout
   version: 0.0.1
   featureIdInternal: com.meta.openxr.feature.subsampledLayout
@@ -1332,7 +1317,6 @@ MonoBehaviour:
   m_colorSubmissionModes:
     m_List: 00000000
   m_depthSubmissionMode: 0
-  m_spacewarpMotionVectorTextureFormat: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
   m_foveatedRenderingApi: 0
@@ -1388,7 +1372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5019471fb2174e5c852ecd4047163007, type: 3}
   m_Name: HandInteractionProfile Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Hand Interaction Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.handinteraction
@@ -1613,7 +1597,6 @@ MonoBehaviour:
   m_Name: Standalone
   m_EditorClassIdentifier: 
   features:
-  - {fileID: -1901025316726583042}
   - {fileID: 7293832499800912966}
   - {fileID: 3039373556059536044}
   - {fileID: -2511808174193321521}
@@ -1625,16 +1608,6 @@ MonoBehaviour:
   - {fileID: -2225078877877223196}
   - {fileID: 3239387890600133414}
   - {fileID: -8335344724800920733}
-  - {fileID: 69492777736102777}
-  - {fileID: -8186445792907330656}
-  - {fileID: 7578618226657862046}
-  - {fileID: 5610926546598316089}
-  - {fileID: -5622912240830506501}
-  - {fileID: 833782459528969960}
-  - {fileID: 6531403780653247705}
-  - {fileID: -6491661491453844197}
-  - {fileID: -1747840276701310888}
-  - {fileID: 4194877248096581338}
   - {fileID: 342371447202883718}
   - {fileID: -3726489281054576248}
   - {fileID: -7277139032030633087}
@@ -1652,7 +1625,6 @@ MonoBehaviour:
   m_colorSubmissionModes:
     m_List: 00000000
   m_depthSubmissionMode: 0
-  m_spacewarpMotionVectorTextureFormat: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
   m_foveatedRenderingApi: 0
