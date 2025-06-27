@@ -44,7 +44,7 @@ Material:
     - _falloff: 0
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _RevealColor: {r: 1, g: 0.9850439, b: 0, a: 1}
+    - _RevealColor: {r: 1, g: 0.023529412, b: 0, a: 1}
     - _Revealer: {r: 0, g: 0, b: 0, a: 0}
     - _TrackedPosition: {r: 0, g: 0, b: 0, a: 0}
     - _TrackedPosition1: {r: 0, g: 0, b: 0, a: 0}
