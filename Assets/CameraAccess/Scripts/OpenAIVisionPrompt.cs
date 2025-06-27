@@ -29,12 +29,12 @@ public class OpenAIVisionPrompt : MonoBehaviour
         openAIApiKey = await APIKeyManager.GetAPIKeyAsync();
 
         // Start the webcam
-        webCamTexture = new WebCamTexture();
-        Renderer renderer = GetComponent<Renderer>();
-        if (renderer != null)
-            renderer.material.mainTexture = webCamTexture;
-        webCamTexture.Play();
-        //StartCoroutine(GetWebcamTexture());
+        //webCamTexture = new WebCamTexture();
+        //Renderer renderer = GetComponent<Renderer>();
+        //if (renderer != null)
+        //    renderer.material.mainTexture = webCamTexture;
+        //webCamTexture.Play();
+        StartCoroutine(GetWebcamTexture());
     }
 
     private IEnumerator GetWebcamTexture()

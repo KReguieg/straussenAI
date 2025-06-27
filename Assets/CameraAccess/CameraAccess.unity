@@ -1129,9 +1129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7e2b94612b27f4dac404dbfb9419b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptDefaults: {fileID: 11400000, guid: 11ec3eb16d88d6d4891bad2e01646202, type: 2}
+  promptDefaults: {fileID: 11400000, guid: b938d1d96429e8647b661830c69f7e6d, type: 2}
   selectedModel: 3
-  userPrompt: Hilf mir das auf dem Bild zu reparieren
+  userPrompt: Was siehst du?
   responseText: {fileID: 1540881421}
   m_webCamTextureManager: {fileID: 1608124433}
 --- !u!4 &882367113
@@ -1230,7 +1230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5325651034816108330, guid: 0e9e59a9b5566489fad35afecaeac3a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6182922352048559143, guid: 0e9e59a9b5566489fad35afecaeac3a9, type: 3}
       propertyPath: m_Pivot.x
@@ -2018,6 +2018,10 @@ PrefabInstance:
     - target: {fileID: 7847449403238870662, guid: abfaad578d05e4a09838223134c41c46, type: 3}
       propertyPath: m_Name
       value: WebCamTextureManagerPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847449403238870662, guid: abfaad578d05e4a09838223134c41c46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
