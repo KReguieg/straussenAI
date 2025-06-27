@@ -14,9 +14,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/CameraAccess/PassthroughCameraApiSamples/CameraViewer/CameraViewer.unity
     guid: ad5bb12b10679b840999aa322aa7a491
-  - enabled: 1
+  - enabled: 0
     path: Assets/CameraAccess/CameraAccess.unity
     guid: 9cd51ac5c8bef24438be8f4ada91c532
+  - enabled: 0
+    path: Assets/Samples/Meta - Voice SDK - Immersive Voice Commands/77.0.0/TTS Voices/TTSVoices.unity
+    guid: e99baad8337e84a4f93e76c76b8ce49b
+  - enabled: 1
+    path: Assets/Samples/Meta - Voice SDK - Immersive Voice Commands/77.0.0/Built-In
+      Timer/BuiltInTimer.unity
+    guid: 9e6f8accd4b079d40b3603449f318633
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f99d7185e2b78da4d8251d7994af2e7b, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

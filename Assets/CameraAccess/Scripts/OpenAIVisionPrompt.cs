@@ -17,7 +17,7 @@ public class OpenAIVisionPrompt : MonoBehaviour
     [SerializeField] private GptModel selectedModel = GptModel.GPT4o;
 
 
-    [SerializeField] private string userPrompt = "Was siehst du auf diesem Bild?";
+    [SerializeField] public string userPrompt = "";
     [SerializeField] private TextMeshProUGUI responseText;
     [SerializeField] private WebCamTextureManager m_webCamTextureManager;
 
@@ -59,13 +59,20 @@ public class OpenAIVisionPrompt : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C) && !isRequestRunning)
-        {
-            RequestPictureAnalysation();
-        }
+        //if (Input.GetKeyDown(KeyCode.C) && !isRequestRunning)
+        //{
+        //    RequestPictureAnalysation();
+        //}
     }
 
-    public void RequestPictureAnalysation()
+    public void OnSpoken(string text)
+    {
+        userPrompt = text;
+        RequestPictureAnalysation();
+
+    }
+
+public void RequestPictureAnalysation()
     {
         StartCoroutine(CaptureAndSendToOpenAI());
     }

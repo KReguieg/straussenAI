@@ -22,16 +22,17 @@ public class AI_SpeechToText : AI_Base
     [SerializeField]
     private string language = "en";
 
-    [SerializeField]
-    private Image ButtonImage;
+    //[SerializeField]
+    //private Image ButtonImage;
 
     // The sample rate used for recording.
     private int sampleRate = 16000;
     // Flag indicating whether recording is currently in progress.
-    private bool isRecording = false;
+    private bool isReadyToRecord = false;
     private DateTime lastToggleTime = DateTime.MinValue;
     // Definiere, wie viel Zeit mindestens zwischen den Aufrufen liegen muss
     private readonly TimeSpan debounceTime = TimeSpan.FromSeconds(2);
+    [SerializeField] private UnityEvent<string> onSpeak;
 
 
     private static AudioClip _clip;
@@ -140,11 +141,11 @@ public class AI_SpeechToText : AI_Base
         Debug.LogError(message);
     }
 
-    public void ToggleMaterial()
-    {
-        if (ButtonImage)
-            ButtonImage.material.color = ButtonImage.material.color == Color.red ? Color.blue : Color.red;
-    }
+    //public void ToggleMaterial()
+    //{
+    //    if (ButtonImage)
+    //        ButtonImage.material.color = ButtonImage.material.color == Color.red ? Color.blue : Color.red;
+    //}
 
     public async void ToggleRecording()
     {
@@ -156,28 +157,28 @@ public class AI_SpeechToText : AI_Base
         // Aktualisiere die Zeit des letzten erfolgreichen Aufrufs
         lastToggleTime = DateTime.Now;
 
-        ToggleMaterial();
+        //ToggleMaterial();
 
-        Debug.LogError("entered ToggleRecording with isRecording " + isRecording);
+        Debug.LogError("entered ToggleRecording with isRecording " + isReadyToRecord);
 
-        if (!isRecording)
+        if (isReadyToRecord)
             StartRecording();
         else
         {
             // Internally calls StopRecording
             string text = await ReturnTextFromAudio();
             if (AudioWasRecorded != null)
-                AudioWasRecorded.Invoke(text);
+                onSpeak.Invoke(text);
         }
     }
     private void StartRecording()
     {
-        isRecording = true;
+        isReadyToRecord = false;
         _clip = Microphone.Start(null, false, maxRecordingLength, sampleRate);
     }
     private void StopRecording()
     {
-        isRecording = false;
+        isReadyToRecord = true;
         Microphone.End(null);
     }
 
@@ -216,6 +217,20 @@ public class AI_SpeechToText : AI_Base
         stream.Close();
 
         return wavData;
+    }
+
+    public void Update()
+    {
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    Debug.Log("Recording started");
+        //    ToggleRecording();
+        //}
+
+        //if (Input.GetKeyUp(KeyCode.B))
+        //{
+        //    ToggleRecording();
+        //}
     }
 
 }

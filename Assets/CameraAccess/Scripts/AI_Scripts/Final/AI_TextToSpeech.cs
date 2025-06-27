@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 public class AI_TextToSpeech : AI_Base
 {
     public AudioSource AudioSource;
-    public Animator Animator;
+    //public Animator Animator;
 
     public UnityEvent AudioFinished;
 
@@ -45,17 +45,17 @@ public class AI_TextToSpeech : AI_Base
 
         try
         {
-            //AudioClip audioClip = WavUtility.ToAudioClip(audioData);
-            //if (audioClip != null)
-            //{
-            //    AudioSource.clip = audioClip;
-            //    //AudioSource.Play();
-            //    StartCoroutine(PlayAudioAndWait(AudioSource));
-            //}
-            //else
-            //{
-            //    Debug.LogError("AudioClip konnte nicht erstellt werden.");
-            //}
+            AudioClip audioClip = WavUtility.ToAudioClip(audioData);
+            if (audioClip != null)
+            {
+                AudioSource.clip = audioClip;
+                AudioSource.Play();
+                //StartCoroutine(PlayAudioAndWait(AudioSource));
+            }
+            else
+            {
+                Debug.LogError("AudioClip konnte nicht erstellt werden.");
+            }
         }
         catch (Exception ex)
         {
@@ -64,13 +64,13 @@ public class AI_TextToSpeech : AI_Base
 
     }
 
-    private IEnumerator PlayAudioAndWait(AudioSource audioSource)
-    {
-        audioSource.Play();
-        Animator.SetBool("isPlaying", true);
-        yield return new WaitForSeconds(audioSource.clip.length);
-        Animator.SetBool("isPlaying", false);
-        AudioFinished.Invoke();
-    }
+    //private IEnumerator PlayAudioAndWait(AudioSource audioSource)
+    //{
+    //    audioSource.Play();
+    //    Animator.SetBool("isPlaying", true);
+    //    yield return new WaitForSeconds(audioSource.clip.length);
+    //    Animator.SetBool("isPlaying", false);
+    //    AudioFinished.Invoke();
+    //}
 
 }
