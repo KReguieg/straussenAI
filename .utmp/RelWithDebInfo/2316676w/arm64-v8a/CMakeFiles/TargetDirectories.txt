@@ -1,5 +1,0 @@
-U:/UnityProjects/straussenAI/.utmp/RelWithDebInfo/2316676w/arm64-v8a/CMakeFiles/edit_cache.dir
-U:/UnityProjects/straussenAI/.utmp/RelWithDebInfo/2316676w/arm64-v8a/CMakeFiles/rebuild_cache.dir
-U:/UnityProjects/straussenAI/.utmp/RelWithDebInfo/2316676w/arm64-v8a/GameActivity/CMakeFiles/game.dir
-U:/UnityProjects/straussenAI/.utmp/RelWithDebInfo/2316676w/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
-U:/UnityProjects/straussenAI/.utmp/RelWithDebInfo/2316676w/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
