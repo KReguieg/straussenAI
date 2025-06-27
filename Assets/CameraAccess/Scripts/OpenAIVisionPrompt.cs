@@ -61,13 +61,13 @@ public class OpenAIVisionPrompt : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C) && !isRequestRunning)
         {
-            RequestPictureAnalysation();
+            RequestPictureAnalysis();
         }
     }
 
-    public void RequestPictureAnalysation()
+    public void RequestPictureAnalysis(float delaySeconds = 0)
     {
-        StartCoroutine(CaptureAndSendToOpenAI());
+        StartCoroutine(CaptureAndSendToOpenAI(delaySeconds));
     }
 
     IEnumerator CaptureAndSendToOpenAI(float delaySeconds = 0)
