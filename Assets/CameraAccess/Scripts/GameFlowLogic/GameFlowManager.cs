@@ -73,6 +73,7 @@ public class GameFlowManager : MonoBehaviour
         Debug.LogWarning($"No handler for state '{newState}' found.");
     }
 
+    [ContextMenu("JumpToNextState")]
     public void JumpToNextState()
     {
         // Erstelle eine Liste der States aus den Handlern, in der Reihenfolge wie im Inspector
