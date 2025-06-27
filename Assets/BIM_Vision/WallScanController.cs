@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class WallScanCointroller : MonoBehaviour
+public class WallScanController : MonoBehaviour
 {
 
 
@@ -15,17 +15,16 @@ public class WallScanCointroller : MonoBehaviour
     {
         vfx = GetComponent<VisualEffect>();
     }
-    public void initWall(Vector2 size, Vector3 center)
+    
+    public void InitWall(Vector2 size, Vector3 center)
     {
         gameObject.transform.position = center;
         vfx.SetVector2("dimensionsWH", size);
     }
 
-    public void setWallScanPosition(Vector2 position, float amount)
+    public void SetWallEffectAmount(float amount)
     {
-        wallScanPosition = position;
-        vfx.SetVector2("wallScanPosition", wallScanPosition);
-        vfx.SetFloat("wallScanAmount", amount);
+        vfx.SetFloat("revealAmount", amount);
     }
 
 }
