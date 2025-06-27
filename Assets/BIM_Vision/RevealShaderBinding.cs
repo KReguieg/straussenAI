@@ -29,14 +29,14 @@ public class RevealShaderBinding : MonoBehaviour
             Debug.LogError($"Material on {targetRenderer.name} does not have a property named '{positionProperty2}'.");
         if (!targetRenderer.material.HasProperty(positionProperty3))
             Debug.LogError($"Material on {targetRenderer.name} does not have a property named '{positionProperty3}'.");
+
+        if (trackedTransform1 == null || trackedTransform2 == null || trackedTransform3 == null)
+            Debug.LogError("Tracked Transform is not set. Please assign a Transform to track.");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (trackedTransform1 == null || trackedTransform2 == null || trackedTransform3 == null)
-            Debug.LogError("Tracked Transform is not set. Please assign a Transform to track.");
-
         if (targetRenderer != null && trackedTransform1 != null)
         {
             Vector3 pos1 = trackedTransform1.position;

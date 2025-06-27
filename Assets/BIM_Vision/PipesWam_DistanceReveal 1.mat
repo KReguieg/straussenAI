@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Electricity_DistanceReveal
+  m_Name: PipesWam_DistanceReveal 1
   m_Shader: {fileID: -6465566751694194690, guid: 0e150f2ee23e57a449166e58b04b9f22, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -44,7 +44,7 @@ Material:
     - _falloff: 0
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _RevealColor: {r: 1, g: 0.9850439, b: 0, a: 1}
+    - _RevealColor: {r: 0.94609153, g: 0.6892588, b: 0.16703226, a: 1}
     - _Revealer: {r: 0, g: 0, b: 0, a: 0}
     - _TrackedPosition: {r: 0, g: 0, b: 0, a: 0}
     - _TrackedPosition1: {r: 0, g: 0, b: 0, a: 0}
