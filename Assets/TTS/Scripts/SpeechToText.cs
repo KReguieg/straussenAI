@@ -164,7 +164,8 @@ public class SpeechToText : AI_Base
         string text = await RequestAudioTranscription(wavData);
         if (!string.IsNullOrEmpty(text))
         {
-            responseText.text = "transcribed text: " + text;
+            if (responseText)
+                responseText.text = "transcribed text: " + text;
             onSpeak?.Invoke(text);
         }
     }
@@ -207,9 +208,10 @@ public class SpeechToText : AI_Base
 
     public async Task<string> RequestAudioTranscription(byte[] audioData)
     {
-        responseText.text = "RequestAudioTranscription";
+        if (responseText)
+            responseText.text = "RequestAudioTranscription";
         var model = Model.FromAudioModel(AudioModel.Whisper);
-        
+
         using var formData = new MultipartFormDataContent();
         formData.Add(new StringContent(model.ModelName), "model");
         formData.Add(new StringContent(Temperature.ToString(System.Globalization.CultureInfo.InvariantCulture)), "temperature");
@@ -221,7 +223,8 @@ public class SpeechToText : AI_Base
         formData.Add(audioContent, "file", "audio.wav");
 
         var result = await DoRequest<AudioTranscriptionResponse>(urlSpeechToText, HttpMethod.Post, formData);
-        responseText.text = result.text;
+        if (responseText)
+            responseText.text = result.text;
         return result.text;
     }
 
