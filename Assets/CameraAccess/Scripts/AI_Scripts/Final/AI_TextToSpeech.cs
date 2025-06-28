@@ -25,6 +25,11 @@ public class AI_TextToSpeech : AI_Base
         ConvertTextToSpeechAsync(TestInput);
     }
 
+    protected override async void Start()
+    {
+        apiKey = await APIKeyManager.GetAPIKeyAsync();
+    }
+
     // Starte die Konvertierung von Text zu Sprache
     public async void ConvertTextToSpeechAsync(string text)
     {
@@ -48,8 +53,10 @@ public class AI_TextToSpeech : AI_Base
             AudioClip audioClip = WavUtility.ToAudioClip(audioData);
             if (audioClip != null)
             {
-                responseText.text = text;
-                AudioSource.clip = audioClip;
+                if (responseText)
+                    responseText.text = text;
+                if (AudioSource)
+                    AudioSource.clip = audioClip;
                 StartCoroutine(PlayAudioAndWait(AudioSource));
             }
             else

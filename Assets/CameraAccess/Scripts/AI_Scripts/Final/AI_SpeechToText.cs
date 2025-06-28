@@ -174,10 +174,8 @@ public class AI_SpeechToText : AI_Base
 
         if (volume > volumeThreshold)
         {
-            Debug.LogError(volume);
             if (!isRecordingSpeech)
             {
-                Debug.LogError("Started speech recording");
                 isRecordingSpeech = true;
                 speechBuffer.Clear();
                 silenceTimer = 0f;
@@ -210,8 +208,6 @@ public class AI_SpeechToText : AI_Base
 
         int micPos = Microphone.GetPosition(null);
         int micSamples = _clip.samples;
-        Debug.Log("recorded samples: " + micSamples);
-
 
         int diff = micPos - lastMicPosition;
         if (diff < 0) diff += micSamples;
