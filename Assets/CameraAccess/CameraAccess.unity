@@ -768,6 +768,73 @@ Transform:
   - {fileID: 1779449086}
   m_Father: {fileID: 1978510966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &343593683
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1390910744}
+    m_Modifications:
+    - target: {fileID: 1324109529956063243, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_Name
+      value: logitech_vr_stylus_v1.0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0561
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+--- !u!4 &343593684 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+  m_PrefabInstance: {fileID: 343593683}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &343593685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1324109529956063243, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+  m_PrefabInstance: {fileID: 343593683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &366475849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,8 +1249,8 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 882367112}
           m_TargetAssemblyTypeName: OpenAIVisionPrompt, Assembly-CSharp
-          m_MethodName: RequestPictureAnalysation
-          m_Mode: 1
+          m_MethodName: RequestPictureAnalysis
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1329,7 +1396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &478312661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,6 +1516,14 @@ PrefabInstance:
       propertyPath: _centerEyeCamera
       value: 
       objectReference: {fileID: 1848740389}
+    - target: {fileID: 1168042862848444296, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168042863143544389, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      propertyPath: _root
+      value: 
+      objectReference: {fileID: 1277290162}
     - target: {fileID: 2336446269904782542, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
       propertyPath: _leftEyeAnchor
       value: 
@@ -1521,9 +1596,23 @@ PrefabInstance:
       propertyPath: _ovrCameraRig
       value: 
       objectReference: {fileID: 1441500614}
+    - target: {fileID: 8839895569409382210, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      propertyPath: _root
+      value: 
+      objectReference: {fileID: 343593685}
+    - target: {fileID: 8839895570256033423, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8839895569409382209, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 343593684}
+    - targetCorrespondingSourceObject: {fileID: 1168042863143544390, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1277290161}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4148778239110795873, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
       insertIndex: 1
@@ -2091,7 +2180,7 @@ MonoBehaviour:
       m_Calls: []
   promptDefaults: {fileID: 11400000, guid: 11ec3eb16d88d6d4891bad2e01646202, type: 2}
   selectedModel: 3
-  userPrompt: Help me
+  userPrompt: What do you see on the picture?
   responseText: {fileID: 1540881421}
   m_webCamTextureManager: {fileID: 1608124433}
 --- !u!4 &882367113
@@ -2654,6 +2743,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pokeInteractable: {fileID: 397578180}
   _buttonBaseTransform: {fileID: 1741590966}
+--- !u!1001 &1277290160
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1866677332}
+    m_Modifications:
+    - target: {fileID: 1324109529956063243, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_Name
+      value: logitech_vr_stylus_v1.0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+--- !u!4 &1277290161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+  m_PrefabInstance: {fileID: 1277290160}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1277290162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1324109529956063243, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+  m_PrefabInstance: {fileID: 1277290160}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1390910744 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8839895569409382209, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+  m_PrefabInstance: {fileID: 656524169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1392707410
 GameObject:
   m_ObjectHideFlags: 0
@@ -3379,7 +3540,13 @@ MonoBehaviour:
     methodName: 
     parameterValue: 
     delayInSeconds: 0
-  onExit: []
+  onExit:
+  - target: {fileID: 1825679524}
+    action: 1
+    targetScript: {fileID: 0}
+    methodName: 
+    parameterValue: 
+    delayInSeconds: 0
 --- !u!1 &1741590962
 GameObject:
   m_ObjectHideFlags: 0
@@ -3486,7 +3653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a558b43b962cf0d409497e596d2054c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: 1
+  initialState: 2
   _handlers:
   - state: 1
     handler: {fileID: 657753202}
@@ -4147,6 +4314,11 @@ Transform:
   - {fileID: 770005542}
   m_Father: {fileID: 131451331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1866677332 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1168042863143544390, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+  m_PrefabInstance: {fileID: 656524169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1978510965
 GameObject:
   m_ObjectHideFlags: 0
