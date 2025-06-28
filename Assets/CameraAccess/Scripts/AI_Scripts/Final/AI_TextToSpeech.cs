@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
@@ -8,7 +9,6 @@ using UnityEngine.Networking;
 public class AI_TextToSpeech : AI_Base
 {
     public AudioSource AudioSource;
-    public Animator Animator;
 
     public UnityEvent AudioFinished;
 
@@ -17,7 +17,7 @@ public class AI_TextToSpeech : AI_Base
 
     [TextArea]
     public string TestInput;
-
+    [SerializeField] private TextMeshProUGUI responseText;
 
     [ContextMenu("RequestPromptAnswerAsync")]
     public void TestAsync()
@@ -48,8 +48,8 @@ public class AI_TextToSpeech : AI_Base
             AudioClip audioClip = WavUtility.ToAudioClip(audioData);
             if (audioClip != null)
             {
+                responseText.text = text;
                 AudioSource.clip = audioClip;
-                //AudioSource.Play();
                 StartCoroutine(PlayAudioAndWait(AudioSource));
             }
             else
@@ -67,9 +67,7 @@ public class AI_TextToSpeech : AI_Base
     private IEnumerator PlayAudioAndWait(AudioSource audioSource)
     {
         audioSource.Play();
-        Animator.SetBool("isPlaying", true);
         yield return new WaitForSeconds(audioSource.clip.length);
-        Animator.SetBool("isPlaying", false);
         AudioFinished.Invoke();
     }
 

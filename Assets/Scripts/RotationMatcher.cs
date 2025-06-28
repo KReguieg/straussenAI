@@ -20,16 +20,46 @@ public class RotationMatcher : MonoBehaviour
     [SerializeField] private Color successColor = Color.green;
     [SerializeField] private Color failColor = Color.red;
 
+    [SerializeField] private string triggerTag = "Bohrloch";
+
     private void Update()
     {
+        if (!targetObject) return;
+
         float myAngle = GetAxisAngle(myObject, myAxis);
         float targetAngle = GetAxisAngle(targetObject, targetAxis);
 
         float angleDifference = Mathf.Abs(Mathf.DeltaAngle(myAngle, targetAngle));
-        angleText.text = $"Angle Difference: {angleDifference:F1}°";
+        if (angleText)
+            angleText.text = $"Angle Difference: {angleDifference:F1}°";
 
         bool isMatch = angleDifference <= allowedOffset;
-        targetRenderer.material.color = isMatch ? successColor : failColor;
+
+        if(targetRenderer)
+            targetRenderer.material.color = isMatch ? successColor : failColor;
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(triggerTag))
+        {
+            Debug.LogError("trigger " + triggerTag, other.gameObject);
+            targetObject = other.transform;  
+            angleText = other.GetComponentInChildren<TMP_Text>();
+            targetRenderer = other.GetComponent<Renderer>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(triggerTag))
+        {
+            if (targetRenderer)
+                targetRenderer.material.color = failColor;
+            if (angleText != null) angleText.text = "";
+        }
+            
     }
 
     private float GetAxisAngle(Transform t, Axis axis)

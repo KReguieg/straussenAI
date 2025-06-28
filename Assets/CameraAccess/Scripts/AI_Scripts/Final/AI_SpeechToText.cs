@@ -27,6 +27,13 @@ public class AI_SpeechToText : AI_Base
 
     private static AudioClip _clip;
 
+    protected override async Task InitializeAsync()
+    {
+        await base.InitializeAsync(); // optional
+        Debug.LogError(apiKey);
+    }
+
+
 
     public float volumeThreshold; // adjust as needed
     public float endThreshold;

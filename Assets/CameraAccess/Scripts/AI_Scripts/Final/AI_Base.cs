@@ -14,8 +14,14 @@ public class AI_Base : MonoBehaviour
 
     protected virtual async void Start()
     {
+        await InitializeAsync();
+    }
+
+    protected virtual async Task InitializeAsync()
+    {
         apiKey = await APIKeyManager.GetAPIKeyAsync();
     }
+
 
     public static double Temperature { get; set; } = 0.1;
 
