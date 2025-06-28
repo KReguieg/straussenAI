@@ -51,16 +51,16 @@ public class AI_WholeTesterNew : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log("Recording started");
-            SpeechToText.ToggleRecording();
-        }
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    Debug.Log("Recording started");
+        //    SpeechToText.ToggleRecording();
+        //}
 
-        if (Input.GetKeyUp(KeyCode.B))
-        {
-            SpeechToText.ToggleRecording();
-        }
+        //if (Input.GetKeyUp(KeyCode.B))
+        //{
+        //    SpeechToText.ToggleRecording();
+        //}
     }
 
 
