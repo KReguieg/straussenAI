@@ -15,11 +15,13 @@ public class WallScanController : MonoBehaviour
     {
         vfx = GetComponent<VisualEffect>();
     }
-    
+
     public void InitWall(Vector2 size, Vector3 center)
     {
+        vfx.Reinit(); // Reinitialize the VFX to apply new settings
         gameObject.transform.position = center;
         vfx.SetVector2("dimensionsWH", size);
+        vfx.Play(); // Start the VFX if needed
     }
 
     public void SetWallEffectAmount(float amount)
