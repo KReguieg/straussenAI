@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 6496216824953272334}
   - component: {fileID: 5276222232263565890}
   - component: {fileID: 415577164283765892}
-  - component: {fileID: 3139626498462683688}
-  - component: {fileID: 6831553436732195646}
+  - component: {fileID: 1002833667888048505}
   m_Layer: 3
   m_Name: DistanceText (TMP)
   m_TagString: Untagged
@@ -131,8 +130,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.14333333
-  m_fontSizeBase: 0.14333333
+  m_fontSize: 0.31
+  m_fontSizeBase: 0.31
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -178,7 +177,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 5276222232263565890}
   m_maskType: 0
---- !u!114 &3139626498462683688
+--- !u!114 &1002833667888048505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,38 +186,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 751273008052910749}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee10491ef6d5d1d49a270cf6b09bdc19, type: 3}
+  m_Script: {fileID: 11500000, guid: 127c633b025748a4cb281acaa11b13fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableMipmapping: 1
-  _dynamicResolution: 1
-  _redrawResolutionThreshold: 2147483647
-  rectTransform: {fileID: 6496216824953272334}
-  maxTextureSize: 2048
-  manualRedraw: 1
-  renderInterval: 1
-  renderIntervalFrameOffset: 0
-  expensive: 0
-  layer: 5
-  opacity: 1
-  shape: 0
-  curveRadius: 1
-  overlapMask: 0
-  overlayType: 2
-  _overlayEnabled: 1
---- !u!114 &6831553436732195646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751273008052910749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c3459a626238148a4143ca5cd9706f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetCanvas: {fileID: 3139626498462683688}
+  _alignmentThreshold: 1
+  _alignmentDuration: 0.1
+  _maintainZeroPitch: 1
+  _maintainZeroRoll: 1
+  _alwaysMaintainRotation: 1
+  _grabbable: {fileID: 0}
 --- !u!1 &2043052485722566704
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,8 +249,8 @@ MonoBehaviour:
   _measuringTapeLineRenderer: {fileID: 125918228705718062}
   _measuringTapeText: {fileID: 415577164283765892}
   _textOffsetY: {x: 0, y: 0.025, z: 0}
-  _textSizeRemapInputInMillimeters: {x: 0, y: 150}
-  _textSizeRemapOutputInFontSize: {x: 0.09, y: 0.25}
+  _textSizeRemapInputInMillimeters: {x: 0, y: 15}
+  _textSizeRemapOutputInFontSize: {x: 0.15, y: 0.31}
   _collider: {fileID: 3870232718133832047}
 --- !u!1 &3247002478328927718
 GameObject:
@@ -308,7 +284,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.25, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4539010243153648596}
@@ -327,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 7358e191-33b7-43ca-b066-b2f00531ac66
-  instanceId: 20e5c90e-215b-4411-8e6c-6405e668b880
+  instanceId: 6a743328-8449-439d-8c08-cc09b157189f
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -339,7 +315,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3247002478328927718}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 289301614986012343, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
 --- !u!23 &9216848470290668615
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -404,7 +380,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3666621222528213932
 Rigidbody:
@@ -502,7 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: 62d97641-7f8a-4539-a5db-514fedbbb8ec
+  instanceId: d4fab3b4-c2cf-464c-aff3-464a718c4914
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8
@@ -605,7 +581,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.25, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6897478580103660229}
@@ -624,7 +600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 7358e191-33b7-43ca-b066-b2f00531ac66
-  instanceId: 62e6179a-c603-4538-b0fe-ec89a3ed5e5e
+  instanceId: e1afcdbc-62b0-422a-acfd-6e02ba6f3bc1
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -636,7 +612,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5558225044658426286}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 289301614986012343, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
 --- !u!23 &2844007189641973848
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -701,7 +677,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &53079010399081931
 Rigidbody:
@@ -993,7 +969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: c820d278-f02d-4d54-8176-1b1a4ad18158
+  instanceId: 352fe516-1b31-4a79-892e-09d93e04db0a
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8

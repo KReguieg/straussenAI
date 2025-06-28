@@ -1,4 +1,3 @@
-using Oculus.Interaction;
 using TMPro;
 using UnityEngine;
 
@@ -18,22 +17,10 @@ public class MeasuringTool : MonoBehaviour
     private static readonly int _DistanceInCentimeters = Shader.PropertyToID("_DistanceInCentimeters");
     private Material _lineRendererMaterial;
     private Vector3 _center;
-    private bool _measuringToolPointMoved;
     private float _lastUpdateDistance;
 
     private bool _isQuitting;
-
-    private void OnEnable()
-    {
-        _startPoint.GetComponent<PointableUnityEventWrapper>().WhenUnselect.AddListener(OnMeasuringPointMoved);
-        _endPoint.GetComponent<PointableUnityEventWrapper>().WhenUnselect.AddListener(OnMeasuringPointMoved);
-    }
-
-    private void OnDisable()
-    {
-        _startPoint.GetComponent<PointableUnityEventWrapper>().WhenUnselect.RemoveListener(OnMeasuringPointMoved);
-        _endPoint.GetComponent<PointableUnityEventWrapper>().WhenUnselect.RemoveListener(OnMeasuringPointMoved);
-    }
+    
     
     private void Start()
     {
@@ -44,11 +31,6 @@ public class MeasuringTool : MonoBehaviour
     private void LateUpdate()
     {
         MeasureDistance();
-    }
-    
-    private void OnMeasuringPointMoved(PointerEvent arg0)
-    {
-        _measuringToolPointMoved = true;
     }
     
     private void MeasureDistance()
@@ -79,13 +61,6 @@ public class MeasuringTool : MonoBehaviour
             _textSizeRemapInputInMillimeters.x, _textSizeRemapInputInMillimeters.y,
             _textSizeRemapOutputInFontSize.x, _textSizeRemapOutputInFontSize.y,
             distanceInCentimeters);
-
-        if (_measuringToolPointMoved && !MathHelper.AreSimilar(distance, _lastUpdateDistance, 5))
-        {
-            // Distance should be updated on remote API
-            _lastUpdateDistance = distance;
-            _measuringToolPointMoved = false;
-        }
     }
     
     protected virtual void OnValidate()

@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Meta.XR.MRUtilityKit;
 using Oculus.Interaction;
 using UnityEngine;
@@ -15,12 +13,21 @@ public class RoomSetupManager : MonoBehaviour
     [SerializeField] private float _selectionTime;
 
     [SerializeField] private WallScanController _wallEffect;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _wallSelectedClip;
     [SerializeField] private GameObject _shelfPrefab;
+    [SerializeField] private GameObject _wallInners;
     [SerializeField] private OneGrabTranslateTransformer _shelfGrabTransformer;
     [SerializeField] private Grabbable _grabbable;
     
+    [SerializeField] private GameObject _measuretape1;
+    [SerializeField] private GameObject _measuretape2;
+
+    [SerializeField] private Transform _headTransform;
+    
     private MRUKRoom _room;
     [SerializeField] private MRUKAnchor _tempSelectedWall;
+    private bool wallEffectSpawned = false;
     private bool _selectWallAsWorkingSpace = false;
     private float timer = 0f;
 
@@ -28,9 +35,9 @@ public class RoomSetupManager : MonoBehaviour
 
 
     private OneGrabTranslateTransformer.OneGrabTranslateConstraints _stuckToWallConstraints;
-    
+    private bool done = false;
 
-    
+
     private void OnEnable()
     {
         _mruk.RoomCreatedEvent.AddListener(OnRoomCreated);
@@ -51,7 +58,7 @@ public class RoomSetupManager : MonoBehaviour
     IEnumerator StartWaitForSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        LogAllWalls();
+        InitalizeWalls();
     }
 
     IEnumerator WaitForSeconds(float seconds)
@@ -59,12 +66,12 @@ public class RoomSetupManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
     }
     
-    private bool wallEffectSpawned = false;
-    
+
+
     // Update is called once per frame
     void Update()
     {
-        if (_selectWallAsWorkingSpace)
+        if (_selectWallAsWorkingSpace && !done)
         {
             if (timer <= _selectionTime)
             {
@@ -75,22 +82,49 @@ public class RoomSetupManager : MonoBehaviour
                     _wallEffect.transform.SetPositionAndRotation(SelectedWall.transform.position, SelectedWall.transform.rotation);
                     var size = new Vector2(Mathf.Abs(SelectedWall.PlaneBoundary2D[0].x) * 2,
                         Mathf.Abs(SelectedWall.PlaneBoundary2D[0].y) * 2);
-                    _wallEffect.InitWall(size, SelectedWall.transform.position);
+                    _wallEffect.transform.SetParent(SelectedWall.transform);
+                    _wallEffect.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+                    
+                    _wallEffect.InitWall(size);
                     wallEffectSpawned = true;
                 }
 
-                _wallEffect.SetWallEffectAmount(Mathf.Lerp(0, 1,timer));
+                _wallEffect.SetWallEffectAmount(MathHelper.Remap(0, _selectionTime, 0, 1, timer));
             }
-
-            StartCoroutine(WaitForSeconds(1.0f));
-            
-            var constraint = CreateConstraint(SelectedWall.PlaneBoundary2D);
-            _shelfGrabTransformer.InjectOptionalConstraints(constraint);
-            _shelfGrabTransformer.Initialize(_grabbable);
-            
-            _shelfPrefab.transform.SetParent(SelectedWall.transform);
-            _shelfPrefab.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            else
+            {
+                _selectWallAsWorkingSpace = false;
+                SpawnLogic();
+                done = true;
+            }
         }
+    }
+
+    private void SpawnLogic()
+    {
+        StartCoroutine(WaitForSeconds(0.5f));
+        _audioSource.clip = _wallSelectedClip;
+        _audioSource.Play();
+            
+        var constraint = CreateConstraint(SelectedWall.PlaneBoundary2D);
+        _shelfGrabTransformer.InjectOptionalConstraints(constraint);
+        _shelfGrabTransformer.Initialize(_grabbable);
+        
+        var posOnWall = -Mathf.Abs(SelectedWall.PlaneBoundary2D[0].y) + _headTransform.position.y;
+        
+        _shelfPrefab.transform.SetParent(SelectedWall.transform);
+        _shelfPrefab.transform.SetLocalPositionAndRotation(new Vector3(0, posOnWall, SelectedWall.transform.forward.z * 0.1f), Quaternion.identity);
+        _wallInners.transform.SetParent(SelectedWall.transform);
+        var innerWallPos = new Vector3(0, -Mathf.Abs(SelectedWall.PlaneBoundary2D[0].y), 0);
+        _wallInners.transform.SetLocalPositionAndRotation(innerWallPos, Quaternion.identity);
+            
+        _measuretape1.transform.SetParent(SelectedWall.transform);
+        _measuretape1.transform.SetLocalPositionAndRotation(new Vector3(0, posOnWall - 0.2f, SelectedWall.transform.forward.z * 0.1f), Quaternion.identity);
+        _measuretape1.transform.SetParent(null, true);
+            
+        _measuretape2.transform.SetParent(SelectedWall.transform);
+        _measuretape2.transform.SetLocalPositionAndRotation(new Vector3(0, posOnWall - 0.3f, SelectedWall.transform.forward.z * 0.1f), Quaternion.identity);
+        _measuretape2.transform.SetParent(null, true);
     }
 
     private OneGrabTranslateTransformer.OneGrabTranslateConstraints CreateConstraint(List<Vector2> wallSize)
@@ -139,7 +173,7 @@ public class RoomSetupManager : MonoBehaviour
     }
 
     [ContextMenu("Log Walls")]
-    public void LogAllWalls()
+    public void InitalizeWalls()
     {
         foreach (var wall in _room.WallAnchors)
         {
@@ -174,5 +208,23 @@ public class RoomSetupManager : MonoBehaviour
     public void StopSelectingWallAsWorkingSpace()
     {
         _selectWallAsWorkingSpace = false;
+    }
+    
+    Vector3 ProjectHeightOnWall(Vector3 wallCenter, Vector3 wallNormal, Vector3 wallUp, float x, float y)
+    {
+        Vector3 right = Vector3.Cross(wallNormal, wallUp).normalized;
+        Vector3 up = wallUp.normalized;
+        Vector3 localPos = wallCenter + right * x + up * y;
+        return localPos;
+    }
+
+    public Vector3 ProjectHeight(float height)
+    {
+        // Create wall-aligned coordinate system
+        Vector3 wallRight = Vector3.Cross(SelectedWall.transform.forward, SelectedWall.transform.forward).normalized;
+        Vector3 wallUp = Vector3.Cross(wallRight, SelectedWall.transform.forward).normalized;
+        
+        // Calculate projected point
+        return SelectedWall.GetAnchorCenter() + (wallUp * height);
     }
 }
