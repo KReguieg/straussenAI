@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &308237342238158298
 Transform:
   m_ObjectHideFlags: 0
@@ -79,7 +79,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4660896451988509294}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -124,7 +124,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.83
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -132,23 +132,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.89
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.24255042
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.97013885
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -151.926
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -185,6 +185,14 @@ PrefabInstance:
     - target: {fileID: 4956175960146861478, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f79bb20fff2815c40a7295451c7c0b2d, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8936143746332176213, guid: 0065790beb5084e46bcb27d4a935468c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

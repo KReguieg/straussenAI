@@ -67,6 +67,7 @@ public class OpenAIVisionPrompt : MonoBehaviour
 
     public void RequestPictureAnalysis(float delaySeconds = 0)
     {
+        responseText.text = "Good question!";
         StartCoroutine(CaptureAndSendToOpenAI(delaySeconds));
     }
 
