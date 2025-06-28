@@ -2,11 +2,13 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HardcodePrompter : MonoBehaviour
 {
     public List<Promper> prompters = new List<Promper>();
     public AI_TextToSpeech aI_TextToSpeech;
+    public TextMeshProUGUI responseText;
 
     public int debugIndex = 0;
 
@@ -27,6 +29,8 @@ public class HardcodePrompter : MonoBehaviour
             return;
         }
         aI_TextToSpeech.ConvertTextToSpeechAsync(selectedPrompter.PromptText);
+        if (responseText)
+            responseText.text = selectedPrompter.PromptText;
     }
 }
 

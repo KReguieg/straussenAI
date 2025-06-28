@@ -3497,6 +3497,7 @@ MonoBehaviour:
   - IndexOfPrompt: 1
     PromptText: I do not whats worth fighting for
   aI_TextToSpeech: {fileID: 1518983184}
+  responseText: {fileID: 638658038}
   debugIndex: 0
 --- !u!4 &1518983183
 Transform:
@@ -3528,7 +3529,19 @@ MonoBehaviour:
   AudioSource: {fileID: 1518983185}
   AudioFinished:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   DesiredVoice: 0
   TestInput: 
   responseText: {fileID: 0}
