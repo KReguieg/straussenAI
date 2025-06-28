@@ -1237,17 +1237,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1002987069}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &882367111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7844380279089813164, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
+  m_PrefabInstance: {fileID: 7372528174924561914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &882367112 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3466876440299142744, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
   m_PrefabInstance: {fileID: 7372528174924561914}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 882367111}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d7e2b94612b27f4dac404dbfb9419b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &882367114 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3319797476829133430, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
+  m_PrefabInstance: {fileID: 7372528174924561914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882367111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f92076410235b654a9a30d13e50c39f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &882367116 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3878413675747170486, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
+  m_PrefabInstance: {fileID: 7372528174924561914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882367111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8872c3cda72564ab240655e5e0bbdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &882367117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882367111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd9a6ee9a1796447bd4fc659d0e277f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prompters:
+  - IndexOfPrompt: 0
+    PromptText: 'Hi, I''m your assistant, I will help you install this shelf..
+
+      Touch
+      the wall where you want to install the shelf.'
+  - IndexOfPrompt: 1
+    PromptText: 'Grab the virtual shelf and place it where you want it to be.
+
+      Beware
+      the water pipes and electrical wires that you can see inside the wall.'
+  - IndexOfPrompt: 2
+    PromptText: Take the drill when you are happy with the position of the shelf.
+  - IndexOfPrompt: 3
+    PromptText: "The line dictates the angle of the drill. Be carefull while handling
+      it. Hold the drill with both hands, keep it straight, and start drilling slowly
+      at your marked spot. Apply gentle, steady pressure \u2014 let the drill do
+      the work. Always wear safety goggles and ensure the drill is off when changing
+      bits."
+  aI_TextToSpeech: {fileID: 882367114}
+  speechToText: {fileID: 882367116}
+  debugIndex: 0
 --- !u!1 &1002987068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,7 +2445,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7844380279089813164, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 882367117}
   m_SourcePrefab: {fileID: 100100000, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

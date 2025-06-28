@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3319797476829133430}
   - component: {fileID: 173173057906361424}
   - component: {fileID: 3878413675747170486}
+  - component: {fileID: 7369353218712289341}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -238,3 +239,37 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   responseText: {fileID: 0}
+--- !u!114 &7369353218712289341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7844380279089813164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd9a6ee9a1796447bd4fc659d0e277f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prompters:
+  - IndexOfPrompt: 0
+    PromptText: 'Hi, I''m your assistant, I will help you install this shelf..
+
+      Touch
+      the wall where you want to install the shelf.'
+  - IndexOfPrompt: 1
+    PromptText: 'Grab the virtual shelf and place it where you want it to be.
+
+      Beware
+      the water pipes and electrical wires that you can see inside the wall.'
+  - IndexOfPrompt: 2
+    PromptText: Take the drill when you are happy with the position of the shelf.
+  - IndexOfPrompt: 3
+    PromptText: "The line dictates the angle of the drill. Be carefull while handling
+      it. Hold the drill with both hands, keep it straight, and start drilling slowly
+      at your marked spot. Apply gentle, steady pressure \u2014 let the drill do
+      the work. Always wear safety goggles and ensure the drill is off when changing
+      bits."
+  aI_TextToSpeech: {fileID: 3319797476829133430}
+  speechToText: {fileID: 3878413675747170486}
+  debugIndex: 0

@@ -35,11 +35,12 @@ public class SpeechToText : AI_Base
     protected override async void Start()
     {
         apiKey = await APIKeyManager.GetAPIKeyAsync();
-        MicrophoneStart();
+        //MicrophoneStart();
     }
 
     void Update()
     {
+        if (!Microphone.IsRecording(null)) return;
         float volume = GetMicVolume();
 
         if (volume > startThreshold)

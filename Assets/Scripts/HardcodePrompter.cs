@@ -7,12 +7,14 @@ public class HardcodePrompter : MonoBehaviour
 {
     public List<Promper> prompters = new List<Promper>();
     public AI_TextToSpeech aI_TextToSpeech;
+    public SpeechToText speechToText;
 
     public int debugIndex = 0;
 
     [ContextMenu("RequestPromptAnswerAsync")]
     public void RequestPromptAnswerAsync()
     {
+        speechToText.MicrophoneStop();
         int index = debugIndex;
 
         if (index < 0 || index >= prompters.Count)
