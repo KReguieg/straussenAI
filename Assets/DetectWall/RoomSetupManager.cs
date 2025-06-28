@@ -11,12 +11,13 @@ public class RoomSetupManager : MonoBehaviour
 {
     [SerializeField] private MRUK _mruk;
     [SerializeField] private EffectMesh _metaEffectMesh;
-    [Range(1.0f, 3.0f)]
+    [Range(1.0f, 5.0f)]
     [SerializeField] private float _selectionTime;
 
     [SerializeField] private WallScanController _wallEffect;
     [SerializeField] private GameObject _shelfPrefab;
     [SerializeField] private OneGrabTranslateTransformer _shelfGrabTransformer;
+    [SerializeField] private Grabbable _grabbable;
     
     private MRUKRoom _room;
     [SerializeField] private MRUKAnchor _tempSelectedWall;
@@ -44,13 +45,18 @@ public class RoomSetupManager : MonoBehaviour
     private void OnRoomCreated(MRUKRoom room)
     {
         _room = room;
-        StartCoroutine(WaitForSeconds());
+        StartCoroutine(StartWaitForSeconds(0.5f));
+    }
+    
+    IEnumerator StartWaitForSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        LogAllWalls();
     }
 
-    IEnumerator WaitForSeconds()
+    IEnumerator WaitForSeconds(float seconds)
     {
-        yield return new WaitForSeconds(5.0f);
-        LogAllWalls();
+        yield return new WaitForSeconds(seconds);
     }
     
     private bool wallEffectSpawned = false;
@@ -76,12 +82,14 @@ public class RoomSetupManager : MonoBehaviour
                 _wallEffect.SetWallEffectAmount(Mathf.Lerp(0, 1,timer));
             }
 
+            StartCoroutine(WaitForSeconds(1.0f));
+            
             var constraint = CreateConstraint(SelectedWall.PlaneBoundary2D);
             _shelfGrabTransformer.InjectOptionalConstraints(constraint);
-            _shelfGrabTransformer.Initialize(transform.GetComponent<IGrabbable>());
-            _shelfPrefab.transform.position = SelectedWall.GetAnchorCenter();
-            _shelfPrefab.transform.rotation = Quaternion.LookRotation(SelectedWall.transform.forward);
-            _shelfPrefab.gameObject.SetActive(true);
+            _shelfGrabTransformer.Initialize(_grabbable);
+            
+            _shelfPrefab.transform.SetParent(SelectedWall.transform);
+            _shelfPrefab.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         }
     }
 
@@ -93,22 +101,22 @@ public class RoomSetupManager : MonoBehaviour
             MinX = new FloatConstraint()
             {
                 Constrain = true,
-                Value = wallSize[0].x
+                Value = -wallSize[0].x
             },
             MaxX = new FloatConstraint()
             {
                 Constrain = true,
-                Value = wallSize[1].x
+                Value = wallSize[0].x
             },
             MinY = new FloatConstraint()
             {
                 Constrain = true,
-                Value = wallSize[0].y
+                Value = -wallSize[0].y
             },
             MaxY = new FloatConstraint()
             {
                 Constrain = true,
-                Value = wallSize[1].y
+                Value = wallSize[0].y
             },
             MinZ = new FloatConstraint()
             {
