@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -22,16 +22,6 @@ public class AI_SpeechToText : AI_Base
     [SerializeField]
     private string language = "en";
 
-    //[SerializeField]
-    //private Image ButtonImage;
-
-    // The sample rate used for recording.
-    private int sampleRate = 16000;
-    // Flag indicating whether recording is currently in progress.
-    private bool isReadyToRecord = false;
-    private DateTime lastToggleTime = DateTime.MinValue;
-    // Definiere, wie viel Zeit mindestens zwischen den Aufrufen liegen muss
-    private readonly TimeSpan debounceTime = TimeSpan.FromSeconds(2);
     [SerializeField] private UnityEvent<string> onSpeak;
 
 
@@ -45,32 +35,28 @@ public class AI_SpeechToText : AI_Base
 
 
 
-    // Called when recording was finished
-    private async Task<string> ReturnTextFromAudio()
-    {
-        int length = Microphone.GetPosition(null);
-        float[] samples = new float[length];
-        _clip.GetData(samples, 0);
-        StopRecording();
+    public float volumeThreshold; // adjust as needed
+    public float endThreshold;
+    public float silenceTimeout = 1.0f;   // seconds of silence before stopping recording
+    public int minRecordingLength = 500;  // ms, discard shorter noise
+    private int sampleWindow = 64;
 
-        Task<string> transcriptionTask = RequestAudioTranscription(samples, Model.FromAudioModel(AudioModel.Whisper), Temperature, language);
-        await transcriptionTask;
+    private bool isRecordingSpeech = false;
+    private float silenceTimer = 0f;
 
-        Debug.Log("Input is " + transcriptionTask.Result);
+    private List<float> speechBuffer = new List<float>();
+    public float loudnessSensibility = 10f;
+    int lastMicPosition = 0;
 
-        return transcriptionTask.Result;
-    }
-    public async Task<string> RequestAudioTranscription(float[] pcmSamples16k1Ch, Model model, double temperature, string language = null)
+
+    public async Task<string> RequestAudioTranscription(byte[] audioData)
     {
-        byte[] audioData = ConvertAudioClipToWav(pcmSamples16k1Ch, 1, 16000);
-        return await RequestAudioTranscription(audioData, model, temperature, language);
-    }
-    public async Task<string> RequestAudioTranscription(byte[] audioData, Model model, double temperature, string language = null)
-    {
+        Model model = Model.FromAudioModel(AudioModel.Whisper);
+
         using var formData = new MultipartFormDataContent();
 
         formData.Add(new StringContent(model.ModelName), "model");
-        formData.Add(new StringContent(temperature.ToString(System.Globalization.CultureInfo.InvariantCulture)), "temperature");
+        formData.Add(new StringContent(Temperature.ToString(System.Globalization.CultureInfo.InvariantCulture)), "temperature");
 
         if (language != null)
         {
@@ -136,108 +122,189 @@ public class AI_SpeechToText : AI_Base
         return await tcs.Task;
     }
 
-    public void Debugger(string message)
+    byte[] ConvertToWav(float[] samples, int sampleRate, int channels)
     {
-        // Überprüfe, ob die letzte Umschaltung weniger als 'debounceTime' zurückliegt
-        if ((DateTime.Now - lastToggleTime) < debounceTime)
-            return; // Wenn ja, ignoriere den aktuellen Aufruf
+        short[] intData = new short[samples.Length];
+        byte[] bytesData = new byte[samples.Length * 2];
 
-        // Aktualisiere die Zeit des letzten erfolgreichen Aufrufs
-        lastToggleTime = DateTime.Now;
-
-        Debug.LogError(message);
-    }
-
-    //public void ToggleMaterial()
-    //{
-    //    if (ButtonImage)
-    //        ButtonImage.material.color = ButtonImage.material.color == Color.red ? Color.blue : Color.red;
-    //}
-
-    public async void ToggleRecording()
-    {
-
-        // Überprüfe, ob die letzte Umschaltung weniger als 'debounceTime' zurückliegt
-        if ((DateTime.Now - lastToggleTime) < debounceTime)
-            return; // Wenn ja, ignoriere den aktuellen Aufruf
-
-        // Aktualisiere die Zeit des letzten erfolgreichen Aufrufs
-        lastToggleTime = DateTime.Now;
-
-        //ToggleMaterial();
-
-        Debug.LogError("entered ToggleRecording with isRecording " + isReadyToRecord);
-
-        if (isReadyToRecord)
-            StartRecording();
-        else
-        {
-            // Internally calls StopRecording
-            string text = await ReturnTextFromAudio();
-            if (AudioWasRecorded != null)
-                onSpeak.Invoke(text);
-        }
-    }
-    private void StartRecording()
-    {
-        isReadyToRecord = false;
-        _clip = Microphone.Start(null, false, maxRecordingLength, sampleRate);
-    }
-    private void StopRecording()
-    {
-        isReadyToRecord = true;
-        Microphone.End(null);
-    }
-
-    /// <summary>
-    /// Converts an audio clip to a wav byte array
-    /// </summary>
-    private byte[] ConvertAudioClipToWav(float[] samples, int channels, int frequency)
-    {
-        var stream = new MemoryStream();
-        var writer = new BinaryWriter(stream);
-
-        int totalBytes = samples.Length * 2;
-
-        writer.Write(0x46464952); // "RIFF"
-        writer.Write(36 + totalBytes);
-        writer.Write(0x45564157); // "WAVE"
-        writer.Write(0x20746D66); // "fmt "
-        writer.Write(16);
-        writer.Write((short)1); // PCM format
-        writer.Write((short)channels);
-        writer.Write(frequency);
-        writer.Write(frequency * channels * 2); // Byte rate
-        writer.Write((short)(channels * 2)); // Block align
-        writer.Write((short)16); // Bits per sample
-        writer.Write(0x61746164); // "data"
-        writer.Write(totalBytes);
+        float rescaleFactor = 32767;
 
         for (int i = 0; i < samples.Length; i++)
         {
-            writer.Write((short)(samples[i] * 32767));
+            intData[i] = (short)(samples[i] * rescaleFactor);
         }
+        Buffer.BlockCopy(intData, 0, bytesData, 0, bytesData.Length);
+
+        using MemoryStream stream = new MemoryStream();
+        using BinaryWriter writer = new BinaryWriter(stream);
+
+        int headerSize = 44;
+        int fileSize = bytesData.Length + headerSize - 8;
+
+        writer.Write(System.Text.Encoding.ASCII.GetBytes("RIFF"));
+        writer.Write(fileSize);
+        writer.Write(System.Text.Encoding.ASCII.GetBytes("WAVE"));
+        writer.Write(System.Text.Encoding.ASCII.GetBytes("fmt "));
+        writer.Write(16); // PCM chunk size
+        writer.Write((short)1); // PCM
+        writer.Write((short)channels); // channels
+        writer.Write(sampleRate);
+        writer.Write(sampleRate * channels * 2); // byte rate
+        writer.Write((short)(channels * 2)); // block align
+        writer.Write((short)16); // bits per sample
+
+        writer.Write(System.Text.Encoding.ASCII.GetBytes("data"));
+        writer.Write(bytesData.Length);
+        writer.Write(bytesData);
 
         writer.Flush();
-        byte[] wavData = stream.ToArray();
-        writer.Close();
-        stream.Close();
-
-        return wavData;
+        return stream.ToArray();
     }
 
-    public void Update()
+    void Start()
     {
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-        //    Debug.Log("Recording started");
-        //    ToggleRecording();
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.B))
-        //{
-        //    ToggleRecording();
-        //}
+        // Start recording from default microphone
+        _clip = Microphone.Start(null, true, 20, AudioSettings.outputSampleRate);
     }
 
+    void Update()
+    {
+        float volume = GetMicVolume();
+        //Debug.Log("Mic Volume: " + volume);
+
+        if (volume > volumeThreshold)
+        {
+            Debug.LogError(volume);
+            if (!isRecordingSpeech)
+            {
+                Debug.LogError("Started speech recording");
+                isRecordingSpeech = true;
+                speechBuffer.Clear();
+                silenceTimer = 0f;
+            }
+            silenceTimer = 0f;
+        }
+        else if (isRecordingSpeech && volume < endThreshold)
+        {
+            silenceTimer += Time.deltaTime;
+            if (silenceTimer >= silenceTimeout)
+            {
+                Debug.Log("Stopped recording speech");
+                isRecordingSpeech = false;
+                ProcessAudio();
+                silenceTimer = 0f;
+            }
+        }
+
+
+        if (isRecordingSpeech)
+        {
+            AppendCurrentMicSample();
+
+        }
+    }
+
+    void AppendCurrentMicSample()
+    {
+        if (_clip == null) return;
+
+        int micPos = Microphone.GetPosition(null);
+        int micSamples = _clip.samples;
+        Debug.Log("recorded samples: " + micSamples);
+
+
+        int diff = micPos - lastMicPosition;
+        if (diff < 0) diff += micSamples;
+        if (diff == 0) return;
+
+        float[] samples = new float[diff];
+        if (lastMicPosition + diff <= micSamples)
+        {
+            _clip.GetData(samples, lastMicPosition);
+        }
+        else
+        {
+            int samplesToEnd = micSamples - lastMicPosition;
+            float[] temp1 = new float[samplesToEnd];
+            _clip.GetData(temp1, lastMicPosition);
+
+            float[] temp2 = new float[diff - samplesToEnd];
+            _clip.GetData(temp2, 0);
+
+            samples = new float[temp1.Length + temp2.Length];
+            temp1.CopyTo(samples, 0);
+            temp2.CopyTo(samples, temp1.Length);
+        }
+
+        speechBuffer.AddRange(samples);
+
+        lastMicPosition = micPos;
+        //Debug.Log("recorded samples: " + samples);
+    }
+
+    async void ProcessAudio()
+    {
+        Debug.Log($"Processing {speechBuffer.Count} samples");
+
+        // Convert speechBuffer to proper audio file/format for your STT API here.
+        int channels = _clip.channels;
+        byte[] wavData = ConvertToWav(speechBuffer.ToArray(), AudioSettings.outputSampleRate, channels);
+
+
+        string text = await RequestAudioTranscription(wavData);
+       // string text = await ReturnTextFromAudio();
+        if (!string.IsNullOrEmpty(text))
+        {
+            Debug.Log("text from audio: " + text);
+            onSpeak?.Invoke(text);
+        }
+    }
+
+    float GetMicVolume()
+    {
+        int micPosition = Microphone.GetPosition(null);
+        int micSamples = _clip.samples;
+
+        int startPos = micPosition - sampleWindow;
+        if (startPos < 0) startPos += micSamples;
+
+        float[] samples = new float[sampleWindow];
+
+        if (startPos + sampleWindow <= micSamples)
+        {
+            _clip.GetData(samples, startPos);
+        }
+        else
+        {
+            int samplesToEnd = micSamples - startPos;
+            float[] temp1 = new float[samplesToEnd];
+            _clip.GetData(temp1, startPos);
+
+            float[] temp2 = new float[sampleWindow - samplesToEnd];
+            _clip.GetData(temp2, 0);
+
+            samples = new float[temp1.Length + temp2.Length];
+            temp1.CopyTo(samples, 0);
+            temp2.CopyTo(samples, temp1.Length);
+        }
+
+        float totalLoudness = 0f;
+        for (int i = 0; i < samples.Length; i++)
+        {
+            totalLoudness += Mathf.Abs(samples[i]);
+        }
+
+        return totalLoudness / sampleWindow;
+    }
+
+
+
+    void OnDisable()
+    {
+        if (Microphone.IsRecording(null))
+        {
+            Microphone.End(null);
+            Debug.Log("Mic stopped.");
+        }
+    }
 }
