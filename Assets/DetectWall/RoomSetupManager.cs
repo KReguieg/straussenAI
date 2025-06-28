@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Meta.XR.MRUtilityKit;
+using Oculus.Interaction;
 using UnityEngine;
 
 
@@ -9,10 +11,13 @@ public class RoomSetupManager : MonoBehaviour
 {
     [SerializeField] private MRUK _mruk;
     [SerializeField] private EffectMesh _metaEffectMesh;
-    [Range(1.0f, 3.0f)]
+    [Range(1.0f, 5.0f)]
     [SerializeField] private float _selectionTime;
 
     [SerializeField] private WallScanController _wallEffect;
+    [SerializeField] private GameObject _shelfPrefab;
+    [SerializeField] private OneGrabTranslateTransformer _shelfGrabTransformer;
+    [SerializeField] private Grabbable _grabbable;
     
     private MRUKRoom _room;
     [SerializeField] private MRUKAnchor _tempSelectedWall;
@@ -20,6 +25,10 @@ public class RoomSetupManager : MonoBehaviour
     private float timer = 0f;
 
     public MRUKAnchor SelectedWall { get; set; }
+
+
+    private OneGrabTranslateTransformer.OneGrabTranslateConstraints _stuckToWallConstraints;
+    
 
     
     private void OnEnable()
@@ -36,13 +45,18 @@ public class RoomSetupManager : MonoBehaviour
     private void OnRoomCreated(MRUKRoom room)
     {
         _room = room;
-        StartCoroutine(WaitForSeconds());
+        StartCoroutine(StartWaitForSeconds(0.5f));
+    }
+    
+    IEnumerator StartWaitForSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        LogAllWalls();
     }
 
-    IEnumerator WaitForSeconds()
+    IEnumerator WaitForSeconds(float seconds)
     {
-        yield return new WaitForSeconds(5.0f);
-        LogAllWalls();
+        yield return new WaitForSeconds(seconds);
     }
     
     private bool wallEffectSpawned = false;
@@ -67,7 +81,54 @@ public class RoomSetupManager : MonoBehaviour
 
                 _wallEffect.SetWallEffectAmount(Mathf.Lerp(0, 1,timer));
             }
+
+            StartCoroutine(WaitForSeconds(1.0f));
+            
+            var constraint = CreateConstraint(SelectedWall.PlaneBoundary2D);
+            _shelfGrabTransformer.InjectOptionalConstraints(constraint);
+            _shelfGrabTransformer.Initialize(_grabbable);
+            
+            _shelfPrefab.transform.SetParent(SelectedWall.transform);
+            _shelfPrefab.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         }
+    }
+
+    private OneGrabTranslateTransformer.OneGrabTranslateConstraints CreateConstraint(List<Vector2> wallSize)
+    {
+        return new()
+        {
+            ConstraintsAreRelative = false,
+            MinX = new FloatConstraint()
+            {
+                Constrain = true,
+                Value = -wallSize[0].x
+            },
+            MaxX = new FloatConstraint()
+            {
+                Constrain = true,
+                Value = wallSize[0].x
+            },
+            MinY = new FloatConstraint()
+            {
+                Constrain = true,
+                Value = -wallSize[0].y
+            },
+            MaxY = new FloatConstraint()
+            {
+                Constrain = true,
+                Value = wallSize[0].y
+            },
+            MinZ = new FloatConstraint()
+            {
+                Constrain = true,
+                Value = 0
+            },
+            MaxZ = new FloatConstraint()
+            {
+                Constrain = true,
+                Value = 0
+            },
+        };
     }
 
     [ContextMenu("SELECT WALL")]
