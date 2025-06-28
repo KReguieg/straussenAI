@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Meta.XR.MRUtilityKit;
 using Oculus.Interaction;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class RoomSetupManager : MonoBehaviour
@@ -24,6 +25,8 @@ public class RoomSetupManager : MonoBehaviour
     [SerializeField] private GameObject _measuretape2;
 
     [SerializeField] private Transform _headTransform;
+
+    [SerializeField] private UnityEvent setupFinished;
     
     private MRUKRoom _room;
     [SerializeField] private MRUKAnchor _tempSelectedWall;
@@ -96,6 +99,7 @@ public class RoomSetupManager : MonoBehaviour
                 _selectWallAsWorkingSpace = false;
                 SpawnLogic();
                 done = true;
+                setupFinished.Invoke();
             }
         }
     }
