@@ -37,6 +37,13 @@ public class AI_SpeechToText : AI_Base
 
     private static AudioClip _clip;
 
+    protected override async Task InitializeAsync()
+    {
+        await base.InitializeAsync(); // optional
+        Debug.LogError(apiKey);
+    }
+
+
 
     // Called when recording was finished
     private async Task<string> ReturnTextFromAudio()
