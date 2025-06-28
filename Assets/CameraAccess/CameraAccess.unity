@@ -838,6 +838,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1324109529956063243, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
   m_PrefabInstance: {fileID: 343593683}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &343593690 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1813822785949909681, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+  m_PrefabInstance: {fileID: 343593683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &366475849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1797,10 @@ PrefabInstance:
       propertyPath: _ovrCameraRig
       value: 
       objectReference: {fileID: 1441500614}
+    - target: {fileID: 6518508909437870670, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      propertyPath: _pointerPoseRoot
+      value: 
+      objectReference: {fileID: 343593690}
     - target: {fileID: 8839895569409382210, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
       propertyPath: _root
       value: 
@@ -3488,6 +3497,7 @@ MonoBehaviour:
   - IndexOfPrompt: 1
     PromptText: I do not whats worth fighting for
   aI_TextToSpeech: {fileID: 1518983184}
+  debugIndex: 0
 --- !u!4 &1518983183
 Transform:
   m_ObjectHideFlags: 0
