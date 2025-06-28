@@ -182,11 +182,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 745347190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &127696927 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6587332456759456299, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
-  m_PrefabInstance: {fileID: 689297551}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &460934894
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +256,7 @@ MonoBehaviour:
     e33: 1
   SceneSettings:
     DataSource: 0
-    RoomIndex: -1
+    RoomIndex: 1
     RoomPrefabs:
     - {fileID: 5618556046422172173, guid: 4b454e8ccd6764ccdbcd91586969863f, type: 3}
     - {fileID: 5618556046422172173, guid: 029ede24e76b24d0888dc235dd0b96f2, type: 3}
@@ -2579,11 +2574,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1510875290 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 498329940274384514, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
-  m_PrefabInstance: {fileID: 689297551}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1531775547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,11 +3144,11 @@ PrefabInstance:
     - target: {fileID: 4407735911603862964, guid: 99c18f763615f594e9aa964a208f7bf6, type: 3}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 127696927}
+      objectReference: {fileID: 476355926}
     - target: {fileID: 5382289224046695247, guid: 99c18f763615f594e9aa964a208f7bf6, type: 3}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 1510875290}
+      objectReference: {fileID: 1126805920}
     - target: {fileID: 7132327399370720678, guid: 99c18f763615f594e9aa964a208f7bf6, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
       value: 1
