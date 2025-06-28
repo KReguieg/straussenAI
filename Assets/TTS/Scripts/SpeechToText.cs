@@ -44,12 +44,8 @@ public class SpeechToText : AI_Base
 
         if (volume > startThreshold)
         {
-            responseText.text = $"[VOLUME]: {volume:F5}";
-            Debug.Log($"[VOLUME]: {volume:F5}");
             if (!isRecordingSpeech)
             {
-                responseText.text = "Started speech recording";
-                Debug.Log("▶️ Started speech recording");
                 isRecordingSpeech = true;
                 speechBuffer.Clear();
                 silenceTimer = 0f;
@@ -59,11 +55,8 @@ public class SpeechToText : AI_Base
         else if (isRecordingSpeech && volume < stopThreshold)
         {
             silenceTimer += Time.deltaTime;
-            Debug.Log($"[Silence Timer]: {silenceTimer:F2}s");
-
             if (silenceTimer >= silenceTimeout)
             {
-                Debug.Log("⏹️ Stopped speech recording — Processing...");
                 isRecordingSpeech = false;
                 silenceTimer = 0f;
                 MicrophoneStop();
@@ -144,19 +137,14 @@ public class SpeechToText : AI_Base
 
         speechBuffer.AddRange(samples);
         lastMicPosition = micPos;
-
-        Debug.Log($"[BUFFER]: Recorded {samples.Length} new samples");
     }
 
     async void ProcessAudio()
     {
-        Debug.Log($"🔍 Processing {speechBuffer.Count} samples...");
-       
         int channels = _clip.channels;
         byte[] wavData = ConvertToWav(speechBuffer.ToArray(), AudioSettings.outputSampleRate, channels);
         await TranscribeAsync(wavData);
 
-        // Reset last mic position for next round
         lastMicPosition = Microphone.GetPosition(null);
     }
 
@@ -176,7 +164,6 @@ public class SpeechToText : AI_Base
         if (!string.IsNullOrEmpty(text))
         {
             responseText.text = "transcribed text: " + text;
-            Debug.Log($"🗣️ Transcribed text: {text}");
             onSpeak?.Invoke(text);
         }
     }
@@ -239,8 +226,6 @@ public class SpeechToText : AI_Base
 
     private async Task<T> DoRequest<T>(string url, HttpMethod method, HttpContent content, IProgress<double> progress = null, CancellationToken token = default) where T : class
     {
-        Debug.Log($"[API KEY]: '{apiKey}'");
-        responseText.text = "request";
         using var request = new UnityWebRequest(url, method.ToString().ToUpperInvariant());
         request.SetRequestHeader("Authorization", $"Bearer {apiKey}");
         request.SetRequestHeader("Accept", "application/json");
@@ -288,7 +273,6 @@ public class SpeechToText : AI_Base
         if (Microphone.IsRecording(null))
         {
             MicrophoneStop();
-            Debug.Log("🎙️ Microphone stopped.");
         }
     }
 }
