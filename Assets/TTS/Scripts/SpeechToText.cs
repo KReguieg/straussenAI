@@ -151,7 +151,8 @@ public class SpeechToText : AI_Base
 
     public void MicrophoneStart()
     {
-        _clip = Microphone.Start(null, true, 20, AudioSettings.outputSampleRate);
+        if (GameFlowManager.Instance.State.Equals(GameFlowState.Level5))
+            _clip = Microphone.Start(null, true, 20, AudioSettings.outputSampleRate);
     }
 
     public void MicrophoneStop()
@@ -208,8 +209,7 @@ public class SpeechToText : AI_Base
 
     public async Task<string> RequestAudioTranscription(byte[] audioData)
     {
-        if (responseText)
-            responseText.text = "RequestAudioTranscription";
+       
         var model = Model.FromAudioModel(AudioModel.Whisper);
 
         using var formData = new MultipartFormDataContent();
@@ -223,8 +223,6 @@ public class SpeechToText : AI_Base
         formData.Add(audioContent, "file", "audio.wav");
 
         var result = await DoRequest<AudioTranscriptionResponse>(urlSpeechToText, HttpMethod.Post, formData);
-        if (responseText)
-            responseText.text = result.text;
         return result.text;
     }
 

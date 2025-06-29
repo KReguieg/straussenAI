@@ -52,9 +52,10 @@ public class RoomSetupManager : MonoBehaviour
 
     }
 
-    private void OnRoomCreated(MRUKRoom room)
+    public void OnRoomCreated(MRUKRoom room)
     {
         _room = room;
+        setupFinished.Invoke();
         StartCoroutine(StartWaitForSeconds(0.5f));
     }
     
@@ -98,8 +99,7 @@ public class RoomSetupManager : MonoBehaviour
             {
                 _selectWallAsWorkingSpace = false;
                 SpawnLogic();
-                done = true;
-                setupFinished.Invoke();
+                done = true;               
             }
         }
     }

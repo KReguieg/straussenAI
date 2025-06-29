@@ -35,17 +35,18 @@ public class RotationMatcher : MonoBehaviour
 
         bool isMatch = angleDifference <= allowedOffset;
 
-        if(targetRenderer)
+        if (targetRenderer)
             targetRenderer.material.color = isMatch ? successColor : failColor;
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(triggerTag))
+        if (!targetObject && other.CompareTag(triggerTag))
         {
             Debug.LogError("trigger " + triggerTag, other.gameObject);
-            targetObject = other.transform;  
+
+            targetObject = other.transform;
             angleText = other.GetComponentInChildren<TMP_Text>();
             targetRenderer = other.GetComponent<Renderer>();
         }
@@ -53,13 +54,15 @@ public class RotationMatcher : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(triggerTag))
+        if (targetObject && other.CompareTag(triggerTag))
         {
+            Debug.LogError("trigger EXIT " + triggerTag, other.gameObject);
             if (targetRenderer)
                 targetRenderer.material.color = failColor;
             if (angleText != null) angleText.text = "";
+            targetObject = null;
         }
-            
+
     }
 
     private float GetAxisAngle(Transform t, Axis axis)

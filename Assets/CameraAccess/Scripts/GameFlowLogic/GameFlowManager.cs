@@ -9,7 +9,7 @@ public class GameFlowManager : MonoBehaviour
 {
     public static GameFlowManager Instance { get; private set; }
 
-    private GameFlowState _state;
+    public GameFlowState _state;
     public GameFlowState State
     {
         get => _state;
@@ -24,7 +24,6 @@ public class GameFlowManager : MonoBehaviour
     }
 
     [SerializeField] private GameFlowState initialState = GameFlowState.Intro;
-
 
     public static event Action<GameFlowState> OnFlowStateChanged;
 

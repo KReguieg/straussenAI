@@ -11,7 +11,7 @@ public class VisibilityTrigger : MonoBehaviour
 
     public UnityEvent OnTargetBecameVisible;
 
-    private void Reset()
+    private void OnEnable()
     {
         viewCamera = Camera.main;
     }
