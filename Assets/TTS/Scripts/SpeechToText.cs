@@ -31,20 +31,22 @@ public class SpeechToText : AI_Base
     private int lastMicPosition = 0;
     private List<float> speechBuffer = new List<float>();
     [SerializeField] private TextMeshProUGUI responseText;
+    public float volume;
 
     protected override async void Start()
     {
         apiKey = await APIKeyManager.GetAPIKeyAsync();
-        //MicrophoneStart();
+        MicrophoneStart();
     }
 
     void Update()
     {
         if (!Microphone.IsRecording(null)) return;
         float volume = GetMicVolume();
-
+        
         if (volume > startThreshold)
         {
+            Debug.Log(volume);
             if (!isRecordingSpeech)
             {
                 isRecordingSpeech = true;
@@ -147,17 +149,31 @@ public class SpeechToText : AI_Base
         await TranscribeAsync(wavData);
 
         lastMicPosition = Microphone.GetPosition(null);
+
+        speechBuffer.Clear();
     }
 
     public void MicrophoneStart()
     {
-        if (GameFlowManager.Instance.State.Equals(GameFlowState.Level5))
+        if (!GameFlowManager.Instance.State.Equals(GameFlowState.Level5))
+        {
+            MicrophoneStop();
+        }
+        else
+        {
             _clip = Microphone.Start(null, true, 20, AudioSettings.outputSampleRate);
+        }
+           
     }
 
     public void MicrophoneStop()
     {
-        Microphone.End(null);
+        if (isRecordingSpeech)
+        {
+            isRecordingSpeech = false;
+            silenceTimer = 0f;
+            speechBuffer.Clear();
+        }
     }
 
     async Task TranscribeAsync(byte[] wavData)
@@ -223,6 +239,7 @@ public class SpeechToText : AI_Base
         formData.Add(audioContent, "file", "audio.wav");
 
         var result = await DoRequest<AudioTranscriptionResponse>(urlSpeechToText, HttpMethod.Post, formData);
+        Debug.Log("Transcribed text:" + result.text);
         return result.text;
     }
 
