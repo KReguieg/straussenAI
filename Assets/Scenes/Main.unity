@@ -1217,6 +1217,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1255088340}
     m_Modifications:
+    - target: {fileID: 383013851346747495, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1324109529956063243, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
       propertyPath: m_Name
       value: logitech_vr_stylus_v1.0
@@ -1265,6 +1269,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3199431308323719788, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523158476886069725, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655094912981120955, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295628873027779120, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7386722079377458531, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -1276,6 +1296,14 @@ PrefabInstance:
     - target: {fileID: 7465594521165848271, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746682221131281078, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8283999597541506434, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8768542966066045633, guid: 90df24c7a15784ca7a0a300d072cba39, type: 3}
       propertyPath: targetObject
@@ -1838,7 +1866,7 @@ MonoBehaviour:
     e32: 0
     e33: 1
   SceneSettings:
-    DataSource: 2
+    DataSource: 0
     RoomIndex: 1
     RoomPrefabs:
     - {fileID: 5618556046422172173, guid: 4b454e8ccd6764ccdbcd91586969863f, type: 3}
@@ -4066,7 +4094,7 @@ MonoBehaviour:
     targetScript: {fileID: 1731661470}
     methodName: RequestPromptAnswerAsync
     parameterValue: 3
-    delayInSeconds: 2
+    delayInSeconds: 0
   - target: {fileID: 1222466601}
     action: 1
     targetScript: {fileID: 0}
@@ -6718,7 +6746,7 @@ MonoBehaviour:
     targetScript: {fileID: 1731661470}
     methodName: RequestPromptAnswerAsync
     parameterValue: 2
-    delayInSeconds: 20
+    delayInSeconds: 0
   - target: {fileID: 1255088339}
     action: 0
     targetScript: {fileID: 0}
