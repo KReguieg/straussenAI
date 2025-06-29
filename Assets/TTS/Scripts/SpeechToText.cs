@@ -62,6 +62,7 @@ public class SpeechToText : AI_Base
             {
                 isRecordingSpeech = false;
                 silenceTimer = 0f;
+                MicrophoneStop();
                 ProcessAudio();
             }
         }
