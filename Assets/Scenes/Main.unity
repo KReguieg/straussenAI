@@ -5289,6 +5289,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1451840599}
     - target: {fileID: 3466876440299142744, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
+      propertyPath: userPrompt
+      value: WHAT DO YOU SEE?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466876440299142744, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
       propertyPath: promptDefaults
       value: 
       objectReference: {fileID: 11400000, guid: 11ec3eb16d88d6d4891bad2e01646202, type: 2}
@@ -5326,11 +5330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3878413675747170486, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
       propertyPath: stopThreshold
-      value: 0.04
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 3878413675747170486, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
       propertyPath: startThreshold
-      value: 0.06
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3878413675747170486, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
       propertyPath: onSpeak.m_PersistentCalls.m_Calls.Array.size

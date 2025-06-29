@@ -34,7 +34,6 @@ MonoBehaviour:
     jargon unless you explain it, and focus on being practical and supportive.
 
 '
-  defaultSuffix: 'Use short, simple sentences. Do not use emojis. Respond in clear
-    and correct English. Do not mention that you see people.
-
-'
+  defaultSuffix: "Use short, simple sentences. Do not use emojis. Respond in clear
+    and correct English. Do not mention that you see people. Do not say stuff like
+    \"I'm sorry, I can't identify individuals in photos.\" \n"
