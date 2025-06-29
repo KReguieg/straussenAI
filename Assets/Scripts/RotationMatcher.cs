@@ -9,8 +9,11 @@ public class RotationMatcher : MonoBehaviour
     [SerializeField] private Transform myObject;
     [SerializeField] private Axis myAxis = Axis.X;
 
-    [SerializeField] private Transform targetObject;
+    [SerializeField] private Transform[] targetObjects;
+    [SerializeField] private Transform selectedObject;
     [SerializeField] private Axis targetAxis = Axis.X;
+
+    [SerializeField] private float enterDistance = 0.3f;
 
     [SerializeField] private Renderer targetRenderer;
     [SerializeField] private TMP_Text angleText;
@@ -24,10 +27,31 @@ public class RotationMatcher : MonoBehaviour
 
     private void Update()
     {
-        if (!targetObject) return;
+        foreach (Transform obj in targetObjects)
+        {
+            float distance = Vector3.Distance(myObject.position, obj.position);
+            if (distance <= enterDistance && !selectedObject)
+            {
+                Debug.LogError("trigger " + triggerTag, obj.gameObject);
+
+                selectedObject = obj;
+                angleText = obj.GetComponentInChildren<TMP_Text>();
+                targetRenderer = obj.GetComponent<Renderer>();
+            }
+            else if(selectedObject == obj && distance > enterDistance)
+            {
+                Debug.LogError("distance " + distance, obj.gameObject);
+                selectedObject = null;
+                if (targetRenderer)
+                    targetRenderer.material.color = failColor;
+                if (angleText != null) angleText.text = "";
+            }
+        }
+
+        if (!selectedObject) return;
 
         float myAngle = GetAxisAngle(myObject, myAxis);
-        float targetAngle = GetAxisAngle(targetObject, targetAxis);
+        float targetAngle = GetAxisAngle(selectedObject, targetAxis);
 
         float angleDifference = Mathf.Abs(Mathf.DeltaAngle(myAngle, targetAngle));
         if (angleText)
@@ -38,32 +62,9 @@ public class RotationMatcher : MonoBehaviour
         if (targetRenderer)
             targetRenderer.material.color = isMatch ? successColor : failColor;
 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!targetObject && other.CompareTag(triggerTag))
-        {
-            Debug.LogError("trigger " + triggerTag, other.gameObject);
-
-            targetObject = other.transform;
-            angleText = other.GetComponentInChildren<TMP_Text>();
-            targetRenderer = other.GetComponent<Renderer>();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (targetObject && other.CompareTag(triggerTag))
-        {
-            Debug.LogError("trigger EXIT " + triggerTag, other.gameObject);
-            if (targetRenderer)
-                targetRenderer.material.color = failColor;
-            if (angleText != null) angleText.text = "";
-            targetObject = null;
-        }
 
     }
+
 
     private float GetAxisAngle(Transform t, Axis axis)
     {
