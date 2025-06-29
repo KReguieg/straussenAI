@@ -6756,7 +6756,7 @@ MonoBehaviour:
     targetScript: {fileID: 0}
     methodName: 
     parameterValue: 
-    delayInSeconds: 10
+    delayInSeconds: 5
   - target: {fileID: 1255088339}
     action: 2
     targetScript: {fileID: 1255088341}
