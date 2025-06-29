@@ -2458,12 +2458,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onEnter:
-  - target: {fileID: 2035017613}
-    action: 1
-    targetScript: {fileID: 0}
-    methodName: 
-    parameterValue: 
-    delayInSeconds: 0
   - target: {fileID: 1825679524}
     action: 1
     targetScript: {fileID: 0}
@@ -2477,6 +2471,12 @@ MonoBehaviour:
     parameterValue: 
     delayInSeconds: 0
   - target: {fileID: 1255088339}
+    action: 1
+    targetScript: {fileID: 0}
+    methodName: 
+    parameterValue: 
+    delayInSeconds: 0
+  - target: {fileID: 2035017613}
     action: 1
     targetScript: {fileID: 0}
     methodName: 
@@ -2679,7 +2679,7 @@ GameObject:
   - component: {fileID: 708748450}
   - component: {fileID: 708748451}
   m_Layer: 0
-  m_Name: State 2 Shelf placement
+  m_Name: State 2 Shelf placement | to place shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5169,7 +5169,7 @@ GameObject:
   - component: {fileID: 1689337290}
   - component: {fileID: 1689337291}
   m_Layer: 0
-  m_Name: State 1 Strauss appears
+  m_Name: State 1 Strauss appears | to touch wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6711,7 +6711,7 @@ GameObject:
   - component: {fileID: 2136413885}
   - component: {fileID: 2136413886}
   m_Layer: 0
-  m_Name: State 3 Drillroid
+  m_Name: State 3 Drillroid | to grab drill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6756,7 +6756,7 @@ MonoBehaviour:
     targetScript: {fileID: 0}
     methodName: 
     parameterValue: 
-    delayInSeconds: 0
+    delayInSeconds: 10
   - target: {fileID: 1255088339}
     action: 2
     targetScript: {fileID: 1255088341}
