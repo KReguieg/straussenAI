@@ -169,12 +169,9 @@ public class SpeechToText : AI_Base
 
     public void MicrophoneStop()
     {
-        if (isRecordingSpeech)
-        {
             isRecordingSpeech = false;
             silenceTimer = 0f;
             speechBuffer.Clear();
-        }
     }
 
     async Task TranscribeAsync(byte[] wavData)
