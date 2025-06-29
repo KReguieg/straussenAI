@@ -31,7 +31,7 @@ public class SpeechToText : AI_Base
     private int lastMicPosition = 0;
     private List<float> speechBuffer = new List<float>();
     [SerializeField] private TextMeshProUGUI responseText;
-    public float volume;
+    //public float volume;
 
     protected override async void Start()
     {
@@ -62,7 +62,6 @@ public class SpeechToText : AI_Base
             {
                 isRecordingSpeech = false;
                 silenceTimer = 0f;
-                //MicrophoneStop();
                 ProcessAudio();
             }
         }
@@ -167,9 +166,7 @@ public class SpeechToText : AI_Base
 
     public void MicrophoneStop()
     {
-            isRecordingSpeech = false;
-            silenceTimer = 0f;
-            speechBuffer.Clear();
+        Microphone.End(null);
     }
 
     async Task TranscribeAsync(byte[] wavData)
@@ -287,7 +284,8 @@ public class SpeechToText : AI_Base
     {
         if (Microphone.IsRecording(null))
         {
-            MicrophoneStop();
+            Microphone.End(null);
+
         }
     }
 }
