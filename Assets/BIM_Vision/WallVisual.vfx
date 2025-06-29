@@ -1523,7 +1523,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"8aafaa78fe944854997fef757ff4ba72","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"48e93eef0688c4a259cb0eddcd8661f7","type":3}}'
     m_Space: -1
   m_Property:
     name: mainTexture
@@ -4020,10 +4020,6 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615074}
       inputSlot: {fileID: 8926484042661615127}
-    - outputSlot: {fileID: 8926484042661615075}
-      inputSlot: {fileID: 0}
-    - outputSlot: {fileID: 8926484042661615076}
-      inputSlot: {fileID: 0}
     - outputSlot: {fileID: 8926484042661615074}
       inputSlot: {fileID: 8926484042661615121}
     position: {x: 92, y: -1230.2856}

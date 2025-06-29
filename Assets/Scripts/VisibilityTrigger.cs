@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class VisibilityTrigger : MonoBehaviour
 {
     [SerializeField] private Transform targetObject;
-    [SerializeField] private Camera viewCamera;     
+    [SerializeField] private Camera viewCamera;
 
     private bool wasVisible = false;
 
@@ -30,6 +30,7 @@ public class VisibilityTrigger : MonoBehaviour
             wasVisible = true;
             Debug.Log("Target is now visible!");
             OnTargetBecameVisible?.Invoke();
+            enabled = false; // Disable this script after the first visibility event
         }
         else if (!isVisible)
         {

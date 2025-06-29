@@ -18,17 +18,20 @@ public class OpenAIVisionPrompt : MonoBehaviour
 
     [SerializeField] private WebCamTextureManager m_webCamTextureManager;
 
+    [SerializeField] private GameObject loadingBar;
 
     private WebCamTexture webCamTexture;
     private string openAIApiKey = "";
     private bool isRequestRunning = false;
-    private string userPrompt;
+    private string userPrompt = "obama cares";
 
 
     async void Start()
     {
         openAIApiKey = await APIKeyManager.GetAPIKeyAsync();
 
+
+        loadingBar.SetActive(false);
 
 #if UNITY_EDITOR
         // Start the webcam
@@ -65,6 +68,11 @@ public class OpenAIVisionPrompt : MonoBehaviour
         RequestPictureAnalysis();
     }
 
+    [ContextMenu("RequestPictureAnalysisTest")]
+    public void RequestPictureAnalysisTest()
+    {
+        RequestPictureAnalysis(0);
+    }
     public void RequestPictureAnalysis(float delaySeconds = 0)
     {
         StartCoroutine(CaptureAndSendToOpenAI(delaySeconds));
@@ -72,6 +80,7 @@ public class OpenAIVisionPrompt : MonoBehaviour
 
     IEnumerator CaptureAndSendToOpenAI(float delaySeconds = 0)
     {
+        loadingBar.SetActive(true);
         isRequestRunning = true;
 
         yield return new WaitForSeconds(delaySeconds);
@@ -116,6 +125,7 @@ public class OpenAIVisionPrompt : MonoBehaviour
         }
 
         isRequestRunning = false;
+        loadingBar.SetActive(false);
     }
 
     private string BuildOpenAIJSON(string prompt, string base64Image)

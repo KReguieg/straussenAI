@@ -164,6 +164,7 @@ public class SpeechToText : AI_Base
             _clip = Microphone.Start(null, true, 20, AudioSettings.outputSampleRate);
         }
            
+
     }
 
     public void MicrophoneStop()
@@ -225,7 +226,7 @@ public class SpeechToText : AI_Base
 
     public async Task<string> RequestAudioTranscription(byte[] audioData)
     {
-       
+
         var model = Model.FromAudioModel(AudioModel.Whisper);
 
         using var formData = new MultipartFormDataContent();
