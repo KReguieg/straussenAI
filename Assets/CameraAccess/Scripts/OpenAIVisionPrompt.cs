@@ -23,7 +23,7 @@ public class OpenAIVisionPrompt : MonoBehaviour
     private WebCamTexture webCamTexture;
     private string openAIApiKey = "";
     private bool isRequestRunning = false;
-    private string userPrompt = "obama cares";
+    public string userPrompt = "obama cares";
 
 
     async void Start()
