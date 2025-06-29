@@ -62,7 +62,7 @@ public class SpeechToText : AI_Base
             {
                 isRecordingSpeech = false;
                 silenceTimer = 0f;
-                MicrophoneStop();
+                //MicrophoneStop();
                 ProcessAudio();
             }
         }
@@ -163,8 +163,6 @@ public class SpeechToText : AI_Base
         {
             _clip = Microphone.Start(null, true, 20, AudioSettings.outputSampleRate);
         }
-           
-
     }
 
     public void MicrophoneStop()
