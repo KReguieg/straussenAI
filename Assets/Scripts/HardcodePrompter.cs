@@ -13,12 +13,6 @@ public class HardcodePrompter : MonoBehaviour
 
     public int debugIndex = 0;
 
-    [ContextMenu("RequestPromptAnswerAsync")]
-    public void RequestPromptAnswerAsync()
-    {
-        RequestPromptAnswerAsync(debugIndex);
-    }
-
     public void RequestPromptAnswerAsync(int index)
     {
         speechToText.MicrophoneStop();

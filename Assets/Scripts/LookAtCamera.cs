@@ -16,6 +16,8 @@ public class LookAtCamera : MonoBehaviour
     [Range(0.1f, 20f)]
     public float smoothSpeed = 5f;
 
+    public bool showAss;
+
     private Transform cam;
 
     private void Start()
@@ -50,7 +52,11 @@ public class LookAtCamera : MonoBehaviour
 
         if (direction.sqrMagnitude > 0.0001f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(-direction.normalized);
+            Vector3 dir = direction.normalized;
+            if (showAss)
+                dir *= -1;
+
+            Quaternion targetRotation = Quaternion.LookRotation(dir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * smoothSpeed);
         }
     }
