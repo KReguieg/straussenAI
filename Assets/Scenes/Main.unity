@@ -5257,6 +5257,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 638658038}
     - target: {fileID: 3466876440299142744, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
+      propertyPath: loadingBar
+      value: 
+      objectReference: {fileID: 1451840599}
+    - target: {fileID: 3466876440299142744, guid: 602b0a657f9a83e46a605f8401268fca, type: 3}
       propertyPath: promptDefaults
       value: 
       objectReference: {fileID: 11400000, guid: 11ec3eb16d88d6d4891bad2e01646202, type: 2}

@@ -153,8 +153,8 @@ public class SpeechToText : AI_Base
     {
         if (GameFlowManager.Instance.State.Equals(GameFlowState.Level5))
         {
-   
             _clip = Microphone.Start(null, true, 20, AudioSettings.outputSampleRate);
+   
         }
 
     }
